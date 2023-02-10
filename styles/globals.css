@@ -1,0 +1,150 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+@import "tailwindcss/screens";
+body,html{
+  height: 100%;
+  overflow-y: hidden;
+}
+
+.bg {
+    width: 100%;
+    height: 100%;
+     background-image: url("/andromeda.jpg");
+     background-size: cover;
+     background-repeat: no-repeat;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     flex-direction: column;
+    
+     
+   }
+.bgFundo{
+  background-image: url("/animes.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+.input{
+  border-radius: 5px;
+  width: 100%;
+  max-width: 580px;
+  height: 40px;
+  border: none;
+  outline: none;
+  padding: 5px;
+  font-size: 15px;
+}
+.textArea {
+  border-radius: 5px;
+  padding: 10px;
+  width: 100%;
+  height: 100%;
+  
+  border: none;
+  outline: none;
+  font-size: 15px;
+}
+
+
+
+.formLogin{
+  width: 100%;
+  max-width: 500px;
+  border-radius: 5px;
+  border:  solid 1px rgb(45 212 191);
+  background-color:rgba(0, 0, 0, 0.3);
+  padding: 50px;
+
+}
+.formLogin input{
+  margin: 20px 0;
+  width: 80%;
+  height: 40px;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  padding-left: 45px;
+  background-color: transparent;
+  border: solid 1px #ccc;
+  font-size: 15px;
+  color: white;
+  transition: all ease-in-out 1s;
+}
+.formLogin input:focus:hover{
+  border:  solid 1px rgb(45 212 191);
+}
+.bg-login{
+  padding: 15px 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-repeat: repeat;
+  background-size: cover;
+  width: 100%;
+  height: 100vh;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.6),rgba(0, 0, 0, 0.6)), url("/login-bg.jpg")
+
+}
+
+.perfil{
+ 
+  width: 160px;
+  height: 48px;
+  position: absolute;
+  top: 36px;
+  right: -8px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 2px;
+  background-color: #ccc;
+  border-radius: 10px;
+  transform: translateX(0px);
+  gap: 1px;
+
+}
+
+.perfilAdmin{
+  width: 49%;
+}
+
+
+.block-with-text {
+  white-space: normal;
+  overflow: hidden;
+  position: relative;
+  line-height: 1.2em;
+  max-height: 6em; 
+  text-align: justify;
+  margin-right: -1em;
+  padding-right: 1em;
+}
+.modal{
+  width: 100%;
+  height:100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+ 
+  top: 420px;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+}
+.btn{
+  width: 144px;
+  padding:  8px 0;
+  color: white;
+  border-radius: 6px;
+  background-color:rgb(45 212 191);
+  transition:ease-in-out 0.6s;
+}
+.btn:hover{
+    background-color: rgba(114, 238, 192, 0.9);
+}
+
