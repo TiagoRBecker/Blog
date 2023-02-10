@@ -19,10 +19,10 @@ const UserDados = ({ credentials, userDados }: Props) => {
   
   return (
     <LayoutAdmin>
-      <div className="w-full  h-full  bg-gray-100 overflow-auto    ">
+      <div className="w-full  bg-gray-100 overflow-auto    ">
      
         <h1 className="px-5 py-5 text-2xl text-gray-600 ">Perfil Usuário</h1>
-        <div className="flex gap-5 px-5 tablet:flex-col pb-28">
+        <div className="flex gap-5 px-5 tablet:flex-col ">
           <div className="w-2/5 h-full bg-white rounded-md shadow-2xl border border-gray-300 tablet:w-full ">
             <div className="w-full flex items-center justify-center ">
               <img

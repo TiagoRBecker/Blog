@@ -15,11 +15,11 @@ const PostList = ({ posts }: Posts) => {
 
   return (
     <LayoutAdmin>
-      <div className="w-full h-full  overflow-auto cel:h-full">
+      <div className=" w-full  ">
        
           <h1 className="px-5 py-5 text-2xl text-gray-600">Blog Posts</h1>
        
-     <div className="w-full pb-12 grid grid-cols-3 justify-items-center gap-1   tablet:grid-cols-2 cel:block py-5 px-5">
+     <div className="w-full  grid grid-cols-3 justify-items-center gap-1   tablet:grid-cols-2 cel:block pb-50 px-5">
         {
             posts.map((category:any , indice:number)=>(
             <>
@@ -27,7 +27,7 @@ const PostList = ({ posts }: Posts) => {
                     category.posts.map((posts:any, inidce:number)=>(
                   
                
-                     <div className="w-full pb-10 gap-2">
+                     <div className="w-full pb-5 gap-2">
                         <div className="relative">
                             <div className="w-full h-48 cel:flex items-center justify-center h ">
                                 <img 

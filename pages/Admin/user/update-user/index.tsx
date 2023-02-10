@@ -25,8 +25,8 @@ const handleDados = ()=>{
     return(
         <LayoutAdmin>
            
-          <div className="w-full h-full pb-30 " >
-            <div className=" w- full h-full flex justify-start pt-2 flex-col  rounded-md shadow-2xl border border-gray-300 tablet:h-screen ">
+          
+            <div className=" w- full h-full overflow-y-auto flex items-center justify-center pt-2  flex-col  rounded-md shadow-2xl border border-gray-300  ">
                 
                 <h1 className="w-full  text-center  px-4 text-gray-600 text-2xl font-bold  border-gray-500">
                   Dados Cadastrados
@@ -79,7 +79,7 @@ const handleDados = ()=>{
                 </div>
               </form>
             </div>
-        </div>
+        
         
 
         </LayoutAdmin>

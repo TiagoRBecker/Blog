@@ -133,22 +133,21 @@ const Admin = () => {
   };
   return (
     <LayoutAdmin>
-      <div className="w-full h-full overflow-auto pb-20 relative  ">
+      <div className="w-full flex items-center justify-center flex-col ">
         
         <h1 className="px-5 py-5 text-2xl text-gray-600">Relátorio Posts</h1>
-      <div className="absolute w-full ">
-      <div className="px-5  pb-20 w-full">
+   
+       <div className="px-5   w-full">
           <ChartJs dataChart={data as any} optionsChart={options as any} />
-      </div>
-      <div className="px-5 pb-20 w-full">
+        </div>
+        <div className="px-5  w-full">
           <ChartJs
             dataChart={data_doug as any}
             optionsChart={options_doug as any}
           />
-      </div>
+         </div>
 
 
-      </div>
         
       </div>
     </LayoutAdmin>

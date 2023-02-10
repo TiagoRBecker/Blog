@@ -33,7 +33,7 @@ export const LayoutAdmin = ({ children }: Children) => {
     setMobile(!mobile)
   }
   return (
-    <section className="w-full min-h-screen  ">
+    <>
       <header className="w-full h-20">
       <div className="w-full h-full  flex items-center   tablet:w-full   ">
          
@@ -81,14 +81,15 @@ export const LayoutAdmin = ({ children }: Children) => {
         
        
       </header>
+      
       {/*Mobile Menu*/}
       <nav className={mobile?"bg-white w-full h-screen flex   justify-center absolute top-20 z-50":"hidden" }>
             <ul className="hidden/ closedMenu tablet: py-11 w-full flex - flex-col item-center  ">
               <li
-                className={router.pathname === "/Admin"?  "mb-5  w-full border-l-2  border-blue-600 text-blue-600  ":" w-full hover:text-blue-600"}
+                className={router.pathname === "/Admin"?  "mb-5  w-full  text-blue-600  ":" w-full hover:text-blue-600"}
               >
                 <Link href={"/Admin"} onClick={ closedMenu}>
-                  <div className="flex gap-2 ">
+                  <div className="flex gap-2 mb-5 ">
                     <div className="w-14 flex items-start justify-center">
                       <MdOutlineBorderColor size={25} />
                     </div>
@@ -101,11 +102,11 @@ export const LayoutAdmin = ({ children }: Children) => {
                 </Link>
               </li>
               <li
-                className={router.pathname === "/Admin/posts/blog-post" || router.pathname === "/Admin/posts/blog-post/[id]"?"mb-5  w-full  border-l-2 border-blue-600 text-blue-600 ":" w-full hover:text-blue-600"}
+                className={router.pathname === "/Admin/posts/blog-post" || router.pathname === "/Admin/posts/blog-post/[id]"?"mb-5  w-full   text-blue-600 ":" w-full hover:text-blue-600"}
                   
               >
                 <Link href={"/Admin/posts/blog-post"}  onClick={ closedMenu}>
-                  <div className="flex gap-2 ">
+                  <div className="flex gap-2 mb-5 ">
                     <div className="w-14 flex items-start justify-center">
                       <MdOutlineVerticalSplit size={25} />
                     </div>
@@ -117,9 +118,9 @@ export const LayoutAdmin = ({ children }: Children) => {
                   </div>
                 </Link>
               </li>
-              <li className={router.pathname ==="/Admin/posts/add-new-post"? "mb-5 pl-3 w-full  border-l-2 border-blue-600 text-blue-600 ":"pb-5 pl-3 w-full hover:text-blue-600"}>
+              <li className={router.pathname ==="/Admin/posts/add-new-post"? "mb-5  w-full   text-blue-600 ":"pb-5 w-full hover:text-blue-600"}>
                 <Link href={"/Admin/posts/add-new-post"}  onClick={ closedMenu}>
-                  <div className="flex gap-2">
+                  <div className="flex gap-2 mb-5">
                     <div className="w-14 flex items-center justify-center">
                       <MdNoteAdd size={25} />
                     </div>
@@ -133,9 +134,9 @@ export const LayoutAdmin = ({ children }: Children) => {
                   </div>
                 </Link>
               </li>
-              <li className={router.pathname==="/Admin/user/perfil"? "mb-5 pl-3 w-full  border-l-2 border-blue-600 text-blue-600 ":"pb-5 pl-3 w-full hover:text-blue-600"}>
+              <li className={router.pathname==="/Admin/user/perfil"? "mb-5  w-full   text-blue-600 ":"pb-5  w-full hover:text-blue-600"}>
                 <Link href={"/Admin/user/perfil"}  onClick={ closedMenu}>
-                  <div className="flex gap-2">
+                  <div className="flex gap-2 mb-5">
                     <div className="w-14 flex items-start justify-center">
                       <MdOutlinePersonPin size={25} />
                     </div>
@@ -151,10 +152,10 @@ export const LayoutAdmin = ({ children }: Children) => {
               </li>
               
             </ul>
-          </nav>
-      <div className="flex">
-        <aside className=" w-1/5 h-screen flex items-center bg-red-600   flex-col overflow-hidden tablet:hidden">
-          <nav className="w-full flex  items-center justify-center">
+      </nav>
+      <section className="gridT">
+        <aside className="aside tablet:hidden">
+        <nav className="w-full flex  items-center justify-center ">
             <ul className="py-20 w-full flex - flex-col item-center   ">
               <li
                 className={router.pathname === "/Admin"?  "mb-5  w-full  text-blue-600  ":"pb-5 w-full hover:text-blue-600"}
@@ -231,10 +232,11 @@ export const LayoutAdmin = ({ children }: Children) => {
           </nav>
         </aside>
         
-        <section className="w-full  h-screen">
+       <main  className="main">
           {children}
-          </section>
-      </div>
+        </main>
+      
     </section>
+    </>
   );
 };

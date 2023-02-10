@@ -48,7 +48,7 @@ const { user } = useContext(AuthContext)
         <LayoutAdmin>
              
            
-             <section className="w-full h-screen overflow-auto pb-14 relative ">
+             <section className="w-full  ">
                 <Modal
                  openModal={showModalDel?"modal":"hidden"}
                  slug_one="Deseja Apagar o post"
