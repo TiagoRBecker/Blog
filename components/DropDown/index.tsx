@@ -1,5 +1,6 @@
 import Link from 'next/link'
-import { Fragment } from 'react'
+import { Fragment , useContext } from 'react'
+import { AuthContext } from '../../context/Auth/AuthContex'
 import { Menu, Transition } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
 import { MdOutlineSettings,MdOutlineLogout,MdPersonPin } from "react-icons/md";
@@ -12,7 +13,7 @@ export type DropdownProps ={
     ancor_1?:string
     ancor_2?:string,
     ancor_3?:string,
-    click:()=>void
+    
     
 
 }
@@ -20,7 +21,12 @@ function classNames(...classes:any) {
     return classes.filter(Boolean).join(' ')
   }
   
-  export  const DropDown =({ancor_1,ancor_2,ancor_3,nameCreate,nameDelete,nameDrop,nameEdit , click}:DropdownProps) => {
+  export  const DropDown =({ancor_1,ancor_2,ancor_3,nameCreate,nameDelete,nameDrop,nameEdit }:DropdownProps) => {
+   const {signOut}  =  useContext(AuthContext)
+    const Logout = () => {
+  
+      signOut();
+    };
     return (
       <Menu as="div" className="relative inline-block text-left">
         
@@ -83,22 +89,16 @@ function classNames(...classes:any) {
             </div>
             <div className="py-1">
               <Menu.Item>
-                {({ active }) => (
-                  <Link
-                    href={"#"}
-                    className={classNames(
-                      active ? 'bg-white text-black': 'text-gray-700',
-                      'block px-4 py-1 text-md'
-                    )}
-                  >
-                   {
-                    <div className='flex items-center gap-2 ' onClick={click}>
+                
+                  
+              <div className='flex items-center gap-2 px-4 cursor-pointer' onClick={Logout}>
                        <MdOutlineLogout size={15} color={"red"}/>  { nameDelete}
-                     </div>
+                </div>
+                    
                    
-                   }
-                 </Link>
-                )}
+                   
+                
+                
               </Menu.Item>
              
             </div>

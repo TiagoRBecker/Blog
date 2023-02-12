@@ -6,30 +6,46 @@ import Button from "../../../../components/Button";
 export type User = {
   name: string;
   email: string;
+  avatar: string;
+  posts: [];
 };
 export type Dados = {
   dados: [];
 };
 export type Props = {
-  userDados: User;
-  credentials: Dados[];
+  credentials: User;
 };
 
-const UserDados = ({ credentials, userDados }: Props) => {
-  
+const UserDados = ({ credentials }: Props) => {
+  const teste = () => {
+    if (!credentials.avatar) {
+      console.log("NAo tem ");
+    } else {
+      console.log("tem avatar");
+    }
+  };
+  teste();
   return (
     <LayoutAdmin>
       <div className="w-full  bg-gray-100 overflow-auto    ">
-     
         <h1 className="px-5 py-5 text-2xl text-gray-600 ">Perfil Usuário</h1>
+
         <div className="flex gap-5 px-5 tablet:flex-col ">
           <div className="w-2/5 h-full bg-white rounded-md shadow-2xl border border-gray-300 tablet:w-full ">
             <div className="w-full flex items-center justify-center ">
-              <img
-                className="w-36 h-36 rounded-full my-8"
-                src="/perfil.jpg"
-                alt="alt"
-              />
+              {!credentials.avatar ? (
+                <img
+                  className="w-36 h-36 rounded-full my-8"
+                  src={"/perfil.jpg"}
+                  alt="alt"
+                />
+              ) : (
+                <img
+                  className="w-36 h-36 rounded-full my-8"
+                  src={credentials.avatar}
+                  alt="alt"
+                />
+              )}
             </div>
             <div className="w-full flex items-center justify-center flex-col">
               <h1 className="text-gray-600 text-2xl font-bold">Tiago Becker</h1>
@@ -49,8 +65,11 @@ const UserDados = ({ credentials, userDados }: Props) => {
             </div>
           </div>
 
-          <div className={"w-6/12  bg-white rounded-md shadow-2xl border border-gray-300 tablet:w-full h-full"}>
-         
+          <div
+            className={
+              "w-6/12  bg-white rounded-md shadow-2xl border border-gray-300 tablet:w-full h-full"
+            }
+          >
             <h1 className="w-full text-left py-2 px-4 text-gray-600 text-2xl font-bold border-b border-gray-500">
               Dados Cadastrados
             </h1>
@@ -60,7 +79,7 @@ const UserDados = ({ credentials, userDados }: Props) => {
                 <input
                   className="outline-none border border-gray-300  rounded-sm px-3 py-2 bg-[#ccc]"
                   type={"text"}
-                  value={userDados.name}
+                  value={credentials.name}
                   disabled
                 />
               </div>
@@ -70,7 +89,7 @@ const UserDados = ({ credentials, userDados }: Props) => {
                   <input
                     className="outline-none border border-gray-300  rounded-sm px-3 py-2 bg-[#ccc]"
                     type={"text"}
-                    value={userDados.email}
+                    value={credentials.email}
                     disabled
                   />
                 </div>
@@ -97,17 +116,15 @@ const UserDados = ({ credentials, userDados }: Props) => {
               </div>
               <div className="mt-5 mb-5 px-4 tablet: flex item-center justify-center">
                 <Link href={"/Admin/user/update-user"}>
-                <Button
-                  title="Alterar Dados"
-                  className="bg-blue-600 py-2 text-white text-xs px-2 rounded-sm font-normal hover:bg-blue-700"
-                  
-                />
+                  <Button
+                    title="Alterar Dados"
+                    className="bg-blue-600 py-2 text-white text-xs px-2 rounded-sm font-normal hover:bg-blue-700"
+                  />
                 </Link>
               </div>
             </form>
           </div>
         </div>
-        
       </div>
     </LayoutAdmin>
   );
@@ -123,11 +140,9 @@ export const getServerSideProps: any = async (ctx: any) => {
 
   const user = await api.getUser(token);
   const credentials = user.userDados;
-  const userDados = user.user;
 
   return {
     props: {
-      userDados,
       credentials,
     },
   };

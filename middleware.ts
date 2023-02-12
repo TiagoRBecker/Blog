@@ -1,6 +1,5 @@
  
 import { NextResponse } from "next/server";
-import { parseCookies } from "nookies";
  export default function middleware (req:NextResponse){
     
      const token  = req.cookies.get("blogCookie")

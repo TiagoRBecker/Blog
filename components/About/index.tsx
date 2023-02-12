@@ -1,8 +1,11 @@
 import Image from "next/image"
+import { useContext} from "react"
 import { BsFacebook,BsInstagram,BsTwitter,BsYoutube } from "react-icons/bs";
-
+import { AuthContext } from "../../context/Auth/AuthContex";
 
 const About = ()=>{
+    const { user } = useContext(AuthContext)
+    console.log(user)
     return(
         
         <aside className="w-1/4 text-white flex items-center justify-items-center flex-col bg-white">
@@ -10,7 +13,7 @@ const About = ()=>{
 
         <div className="w-44 h-44 bg-white rounded-full flex items-center justify-items-center py-5">
           <Image
-            src={"/perfil.jpg"}
+            src={user?.avatar as any}
             width={250}
             height={250}
             alt="Perfil-usuario"

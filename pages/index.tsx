@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { Categoreis} from "../utils/Types/data";
 import About from "../components/About";
 import LayoutWeb from "../components/LayoutWeb";
 import api from "../utils/api";
@@ -7,8 +6,7 @@ import Posts from "../components/Posts";
 import { LikePosts } from "../components/Posts/likePosts";
 import { Adverts } from "../components/Adverts/index";
 import Button from "../components/Button";
-import { useEffect } from "react";
-import axios from "axios";
+
 
 
 const Home = ({ data, like, categories }: any) => {

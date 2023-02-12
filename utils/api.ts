@@ -1,14 +1,19 @@
 
 
 import axios from "axios"
-const baseUrl = "https://apiblog-production.up.railway.app"
-
+//const baseUrl = "https://apiblog-production.up.railway.app"
+const baseUrl = "http://localhost:8080"
 export default {
     getCategories:async () => {
-        const response = await axios.get(`${baseUrl}/categories`)
+       
+ 
+            const response = await axios.get(`${baseUrl}/categories`)
+            return response.data
           
-        return response.data
+      
+        
     },
+    
     getCategoriesId:async (id:string) => {
         const response = await axios.get(`${baseUrl}/categories/${id}`)
           
@@ -47,5 +52,4 @@ export default {
     checkingServer: async ()=>{
         return await axios.get(baseUrl)
     }
-      
 }

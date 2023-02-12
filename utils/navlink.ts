@@ -9,6 +9,7 @@ export const nav = [
 ];
 
 export const categories = [
+  
   { label:"Animes" , id:1},
   { label:"Filmes" , id:2},
   { label:"Programação" , id:3},

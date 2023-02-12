@@ -20,12 +20,9 @@ export type Children = {
 
 export const LayoutAdmin = ({ children }: Children) => {
   const [mobile, setMobile] = useState(false)
-  const { user, loading, signOut } = useContext(AuthContext);
+  const { user, loading } = useContext(AuthContext);
   const router = useRouter();
-  const Logout = () => {
-  
-    signOut();
-  };
+ 
   const closedMenu = ()=>{
     setMobile(false)
   }
@@ -34,7 +31,7 @@ export const LayoutAdmin = ({ children }: Children) => {
   }
   return (
     <>
-      <header className="w-full h-20">
+      <header className="w-full h-20 border-b border-blueC">
       <div className="w-full h-full  flex items-center   tablet:w-full   ">
          
               <div className=" w-1/5 h-full  flex  items-center justify-center">
@@ -60,12 +57,19 @@ export const LayoutAdmin = ({ children }: Children) => {
                   </span>
                 ) : (
                   <span className=" flex items-center justify-center gap-1">
-                    <MdOutlinePersonPin size={35} />
+                    <div className="w-11 h-11 bg-gray-500 rounded-full">
+                      {!user?.avatar ?
+                        <img className="w-11 h-11 bg-gray-500 rounded-full" src={"/perfil.jpg"} alt="Perfil"/>
+                        :
+                        <img className="w-11 h-11 bg-gray-500 rounded-full" src={user?.avatar} alt="Perfil"/>
+                    }
+                      
+                    </div>
                     <DropDown  nameDrop={`${user?.name}`}
                     nameCreate="Perfil "
                     nameEdit="Editar Perfil"
                     nameDelete="Logout"
-                    click={Logout}
+                    
                     />
                   </span>
                 )}

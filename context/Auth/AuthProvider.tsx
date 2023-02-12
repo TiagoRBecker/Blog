@@ -1,10 +1,10 @@
 import Router from "next/router";
-
-import axios from "axios";
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { AuthContext, User } from "./AuthContex";
 import { setCookie, parseCookies, destroyCookie } from "nookies";
+import axios from "axios";
 import api from "../../utils/api";
+
 
 type Children = {
   children: JSX.Element;
@@ -12,91 +12,66 @@ type Children = {
 
 export const AuthProvider = ({ children }: Children) => {
   const { ["blogCookie"]: token } = parseCookies();
-  const [user, setUser] = useState<User >(null!!);
+  const [user, setUser] = useState<User>(null!!);
   const [loading, setLoading] = useState(true);
-   const [ usersPc, SetUsersPC]= useState (0)
-   const [ usersMobile, SetUsersMobile]= useState (0)
- useEffect(()=>{
+  const [errors, setErros] = useState('')
 
-  const getServer = async () =>{
-    const server = await axios.get("https://apiblog-production.up.railway.app/teste")
-    .then((res)=>{
-      if(res.status === 200){
-        return
-      }
-    })
-    .catch((e)=>{
-      if(e.code === "ERR_NETWORK"){
-        Router.push("/500")
-      }
-    })
- 
-    
+  useEffect(() => {
+    const getServer = async () => {
+      const server = await axios
+        .get("https://apiblog-production.up.railway.app/teste")
+        .then((res) => {
+          if (res.status === 200) {
+            return;
+          }
+        })
+        .catch((e) => {
+          if (e.code === "ERR_NETWORK") {
+            Router.push("/500");
+          }
+        });
+    };
 
-
-   
-    
-    
-    
-   
-  }
-  
-  
- 
-      if(token){
-        
-     
-      const userdados = api.getUser(token).then(
-        response => setUser(response.user)
+    if (token) {
+      const userdados = api
+        .getUser(token)
+        .then((response) => {
          
-       
+            setUser(response.userDados)
         
-        ).then(
-          response =>(
-          setLoading(false)
-        ))
-       
-    
         
+        })
+        .then((response) => setLoading(false));
     }
-  
-   
-    getServer()
 
- },[])
- 
- 
+    getServer();
+  }, []);
 
   const signIn = async (email: string, password: string) => {
     try {
-      
-
-      
-
-      const auth = await axios.post("https://apiblog-production.up.railway.app/user/signin", {
+      const auth = await axios.post("http://localhost:8080/user/signin", {
         email,
         password,
       });
-      const data = auth.data
-      
+      const data = auth.data;
+
       if (auth.status === 200) {
         setCookie(undefined, "blogCookie", auth.data.token, {
           maxAge: 60 * 60 * 2,
         });
-        setUser(data.user)
-         
-       
-
+        setUser(data.user);
       }
-      Router.push("/Admin")
-      setLoading(false)
+      Router.push("/Admin");
+      setLoading(false);
     } catch (error: any) {
-      if (error.code === "ERR_NETWORK") {
-        Router.push("/500");
+      if(error.response){
+
       
+       setErros(error.response.data.msg)
+      }else{
+          Router.push('/500')
       }
     }
-    
   };
   const signUp = async (email: string, password: string, name: string) => {
     const response = await axios.post("http://localhost:8080/signup", {
@@ -108,8 +83,6 @@ export const AuthProvider = ({ children }: Children) => {
       setCookie(undefined, "blogCookie", response.data.token, {
         maxAge: 60 * 60 * 2,
       });
- 
-    
     } else {
       alert("Nao foi possivel criar o usuario");
     }
@@ -118,16 +91,25 @@ export const AuthProvider = ({ children }: Children) => {
   const signOut = async () => {
     if (token) {
       destroyCookie(null, "blogCookie");
+      setLoading(true)
+      return Router.push("/signin");
       
     }
-    setLoading(true)
-    return Router.push("/signin");
-    
+   
   };
   return (
-    <AuthContext.Provider value={{ user, loading, signIn, signUp, signOut }}>
+    <AuthContext.Provider value={{ user,errors, loading, signIn, signUp, signOut }}>
       {children}
     </AuthContext.Provider>
   );
 };
 
+export const getServerSideProps = (ctx:any)=>{
+  const { blogCookie: token } = parseCookies(ctx);
+    console.log(token)
+  return{
+    props:{
+      
+    }
+  }
+}

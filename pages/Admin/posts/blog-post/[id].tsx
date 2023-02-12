@@ -1,3 +1,4 @@
+
 import Image from "next/image"
 import {GetStaticProps} from "next"
 import { useContext,useState } from "react"

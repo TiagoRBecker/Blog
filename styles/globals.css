@@ -10,22 +10,22 @@ body,html{
 .aside{
   grid-area: aside;
   width: 100%;
-   background-color: #ccc;
+  background-image: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%);
 }
 .main{
   grid-area: main;
   width: 100%;
   padding-bottom: 100px;
   overflow-y: auto;
+  height: 100%;
   
 }
 
 .gridT{
   display: grid;
-  width: 98%;
+  width: 100%;
   height: 100vh;
   margin:0 auto;
-  gap: 2rem;
   grid-template-columns: 250px 1fr;
   grid-template-areas: 
   "aside main"
@@ -71,7 +71,19 @@ body,html{
   outline: none;
   font-size: 15px;
 }
+.lottiePosition{
+  position: absolute;
+  
+  top: 0px;
+  width: 100%;
+  height: 100vh;
 
+  background-color: rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+ 
+  flex-direction: column;
+}
 
 
 .formLogin{
@@ -172,6 +184,7 @@ body,html{
 .btn:hover{
     background-color: rgba(114, 238, 192, 0.9);
 }
+
 
 @media screen and (max-width:800px) {
   .gridT{
