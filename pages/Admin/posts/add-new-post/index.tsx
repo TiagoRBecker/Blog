@@ -22,7 +22,7 @@ const Posts = () => {
   const [content, setContent] = useState("");
   const [selectValue, setSelectValue] = useState<any>(0);
   const [ loading ,setLoading] = useState(false)
-  console.log(user?.name);
+
   useEffect(() => {}, []);
 
   const handleClick = async (e: any) => {
@@ -42,7 +42,7 @@ const Posts = () => {
     formData.append("categoriesId", selectValue);
     formData.append("file", image);
     const createNewPost = axios
-      .post("https://apiblog-production.up.railway.app/upload/posts", formData)
+      .post("https://apiblog-production.up.railway.app/posts", formData)
       .then((response) => {
         if(response.data ===200){
           setLoading(false)
@@ -55,6 +55,7 @@ const Posts = () => {
       .catch((error: any) => {
         if (error.response) {
          setError(error.response.data.msg)
+         setLoading(false)
         } else {
           Router.push('/500');
         }
