@@ -10,7 +10,6 @@ export type Posts = {
 };
 
 const PostList = ({ posts }: Posts) => {
-  console.log(posts.length)
   const handlePost = () => {
     Router.push("/Admin/posts/add-new-post");
   };

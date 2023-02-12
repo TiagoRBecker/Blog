@@ -1,7 +1,7 @@
 
 
 import axios from "axios"
-const baseUrl = "https://apiblog-production.up.railway.app"
+const baseUrl = "https://blog-uuxg.vercel.app"
 
 export default {
     getCategories:async () => {
