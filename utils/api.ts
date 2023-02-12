@@ -1,8 +1,8 @@
 
 
 import axios from "axios"
-//const baseUrl = "https://apiblog-production.up.railway.app"
-const baseUrl = "http://localhost:8080"
+const baseUrl = "https://apiblog-production.up.railway.app"
+
 export default {
     getCategories:async () => {
        

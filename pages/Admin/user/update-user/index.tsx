@@ -36,7 +36,7 @@ const Update = ({ userDados }: Props) => {
 
     try {
       const userProfiler = await axios.post(
-        "http://localhost:8080/upload",
+        "https://apiblog-production.up.railway.app/upload",
         formData,
 
         { headers: { Authorization: `Bearer ${token}` } }
