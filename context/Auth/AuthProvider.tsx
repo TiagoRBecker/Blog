@@ -49,7 +49,7 @@ export const AuthProvider = ({ children }: Children) => {
 
   const signIn = async (email: string, password: string) => {
     try {
-      const auth = await axios.post("https://apiblog-production.up.railway.app/upload/user/signin", {
+      const auth = await axios.post("https://apiblog-production.up.railway.app/user/signin", {
         email,
         password,
       });
