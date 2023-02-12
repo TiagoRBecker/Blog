@@ -42,7 +42,7 @@ const Posts = () => {
     formData.append("categoriesId", selectValue);
     formData.append("file", image);
     const createNewPost = axios
-      .post("https://https://blog-uuxg.vercel.app/posts", formData)
+      .post("https://apiblog-production.up.railway.app/posts", formData)
       .then((response) => {
         if(response.data ===200){
           setLoading(false)
