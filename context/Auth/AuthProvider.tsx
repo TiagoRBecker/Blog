@@ -49,7 +49,7 @@ export const AuthProvider = ({ children }: Children) => {
 
   const signIn = async (email: string, password: string) => {
     try {
-      const auth = await axios.post("http://localhost:8080/user/signin", {
+      const auth = await axios.post("https://apiblog-production.up.railway.app/upload/user/signin", {
         email,
         password,
       });
@@ -74,7 +74,7 @@ export const AuthProvider = ({ children }: Children) => {
     }
   };
   const signUp = async (email: string, password: string, name: string) => {
-    const response = await axios.post("http://localhost:8080/signup", {
+    const response = await axios.post("https://apiblog-production.up.railway.app/upload/signup", {
       email,
       password,
       name,
