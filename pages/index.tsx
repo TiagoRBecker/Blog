@@ -10,7 +10,7 @@ import Button from "../components/Button";
 
 
 const Home = ({ data, like, categories }: any) => {
-    
+     console.log(categories)
 
 
   const option = {
@@ -128,7 +128,7 @@ const Home = ({ data, like, categories }: any) => {
                             <div className=" w-full h-auto text-justify">
                               <p className="whitespace-pre-line text-ellipsis overflow-hidden w-full h-12">
                                 {posts.content}
-                                <br />
+                               
                               </p>
                             </div>
                             <div className="py-5">
@@ -145,10 +145,9 @@ const Home = ({ data, like, categories }: any) => {
               </div>
             ) 
         ) }
-        <div className="w-full h-72 bg-slate-900 my-40">
-
-        </div>
+       
       </section>
+                      
     </LayoutWeb>
   
   );

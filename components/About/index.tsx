@@ -13,7 +13,7 @@ const About = ()=>{
 
         <div className="w-44 h-44 bg-white rounded-full flex items-center justify-items-center py-5">
           <Image
-            src={user?.avatar as any}
+            src={"/perfil.jpg"}
             width={250}
             height={250}
             alt="Perfil-usuario"

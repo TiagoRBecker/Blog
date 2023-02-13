@@ -2,7 +2,7 @@
 
 import axios from "axios"
 const baseUrl = "https://apiblog-production.up.railway.app"
-
+axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
 export default {
     getCategories:async () => {
        
