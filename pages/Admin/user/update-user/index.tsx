@@ -1,9 +1,14 @@
+import  Router from "next/router";
 import { useState } from "react";
 import { parseCookies } from "nookies";
 import { LayoutAdmin } from "../../../../components/LayoutAdmin";
+import axios from "axios";
 import Button from "../../../../components/Button";
 import api from "../../../../utils/api";
-import axios from "axios";
+
+import Lottie from "lottie-react";
+import sucess from "../../../../components/Lottie/sucess.json";
+import { Loading } from "../../../../components/Loading";
 
 export type User = {
   name: string;
@@ -18,6 +23,7 @@ export type Props = {
 };
 
 const Update = ({ userDados }: Props) => {
+
   const { ["blogCookie"]: token } = parseCookies();
   const [email, setEmail] = useState(userDados.email);
   const [name, setName] = useState(userDados.name);
@@ -26,41 +32,69 @@ const Update = ({ userDados }: Props) => {
   const [msg, setMsg] = useState(
     "Lorem ipsum dolor sit amet consectetur adipisicing elit. Id iste exercitationem asperiores iure optio inventore ex. Iste accusantium, ipsa similique quia ipsam sequi fugiat maiores nobis dignissimos excepturi! Aspernatur, nesciunt."
   );
-
+  const [error, setError] = useState("");
+  const [lottie ,setLottie] = useState(false)
+  const [loading ,setLoading] = useState(false)
   const handlePerfil = async (e: any) => {
     e.preventDefault();
+    setLoading(true)
     const formData = new FormData();
-    formData.append("file", perfil as any);
+
+    /*formData.append("file", perfil);
     formData.append("name", name);
-    formData.append("email", email);
-
-    try {
-      const userProfiler = await axios.post(
-        "https://apiblog-production.up.railway.app/user/profile",
-        formData,
-
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
-
-      if (userProfiler.status === 200) {
-        return console.log(userProfiler.data);
-      }
-    } catch (error: any) {
-      if (error.response) {
-        console.log(error);
-      } else {
-        console.log("Tente novamente mais tarde");
-      }
-    }
+    formData.append("email", email);*/
+    const testes = await api.updateProfile(name,email,perfil,token)
+      .then((response) => {
+        setLoading(false)
+        setLottie(true)
+        return console.log(response);
+      })
+      .catch((e) => {
+        if (e.response) {
+          setError(e.response.data.msg);
+        } else {
+          Router.push("/500");
+        }
+      });
+  };
+  const handlePushPerfil = () => {
+    setLottie(false)
+    Router.push("/Admin/user/perfil")
+    
+   
   };
 
   return (
     <LayoutAdmin>
-      <div className=" w- full py-10 flex items-center justify-center   flex-col  rounded-md shadow-2xl border border-gray-300  ">
+      <div className=" relative w- full py-10 flex items-center justify-center   flex-col  rounded-md shadow-2xl border border-gray-300  ">
         <h1 className="w-full  text-center  px-4 py-5 text-gray-600 text-2xl font-bold  border-gray-500">
           Dados Cadastrados
         </h1>
-
+        {lottie &&  <div className=" lottiePosition">
+          <div className="w-80 h-80  ">
+            <Lottie
+              height={150}
+              width={150}
+              animationData={sucess}
+              loop={true}
+            />
+          </div>
+          <span className="text-white text-xl">Perfil atualizado sucesso</span>
+          
+          <div className="">
+            <Button
+              click={handlePushPerfil}
+              title="Atualizar"
+              className="w-36 bg-blue-600 mt-12 py-2 text-white text-xs px-2 rounded-md font-normal cursor-pointer hover:bg-blue-700"
+            />
+          </div>
+        </div> }
+        { loading &&
+        <div className=" lottiePosition">
+        <Loading className="absolute " size={150} title="Carregando"/>
+        </div>
+        } 
+       
         <form
           method="POST"
           encType="multipart/form-data"
@@ -71,6 +105,7 @@ const Update = ({ userDados }: Props) => {
               <div className="">
                 {perfil ? (
                   <img
+                    className="rounded-full"
                     src={URL.createObjectURL(perfil)}
                     width={150}
                     height={150}
@@ -95,7 +130,7 @@ const Update = ({ userDados }: Props) => {
                 onChange={(e: any) => setPerfil(e.target.files[0])}
               />
             </div>
-            <div className="py-5 w-full flex items-center justify-center">
+            <div className="py-5 w-full flex flex-col items-center justify-center">
               <label
                 htmlFor="file_input"
                 className="bg-blue-600 py-2 text-white text-xs px-2 rounded-sm font-normal cursor-pointer hover:bg-blue-700 "
@@ -103,6 +138,7 @@ const Update = ({ userDados }: Props) => {
                 {" "}
                 Escolha imagen
               </label>
+              {error && <span className="text-lg text-red-600">{error}</span>}
             </div>
           </div>
 
@@ -154,6 +190,7 @@ const Update = ({ userDados }: Props) => {
             />
           </div>
         </form>
+        
       </div>
     </LayoutAdmin>
   );
@@ -161,8 +198,6 @@ const Update = ({ userDados }: Props) => {
 export default Update;
 export const getServerSideProps = async (ctx: any) => {
   const { blogCookie: token } = parseCookies(ctx) as any;
-  console.log(token);
-
   const user = await api.getUser(token);
 
   const userDados = user.userDados;

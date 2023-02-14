@@ -8,8 +8,9 @@ export type AuthenticatedType = {
    loading:boolean
    user:User | null
    errors:string
+   setErros:any
    signIn: (email:string, password:string) => void
-   signOut: ()=> void
+   signOut: ()=> any
    signUp: (email:string,name:string,password:string)=>Promise<void>
 }
 

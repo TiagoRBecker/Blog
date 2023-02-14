@@ -4,7 +4,7 @@ import { AuthContext } from '../../context/Auth/AuthContex'
 import { Menu, Transition } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
 import { MdOutlineSettings,MdOutlineLogout,MdPersonPin } from "react-icons/md";
-
+import { parseCookies } from 'nookies'
 export type DropdownProps ={
     nameDrop?:string
     nameCreate?:string
@@ -21,8 +21,10 @@ function classNames(...classes:any) {
     return classes.filter(Boolean).join(' ')
   }
   
-  export  const DropDown =({ancor_1,ancor_2,ancor_3,nameCreate,nameDelete,nameDrop,nameEdit }:DropdownProps) => {
+  export  const DropDown =({nameCreate,nameDelete,nameDrop,nameEdit }:DropdownProps) => {
    const {signOut}  =  useContext(AuthContext)
+   const { "blogCookie":token} = parseCookies()
+  
     const Logout = () => {
   
       signOut();
@@ -93,7 +95,7 @@ function classNames(...classes:any) {
                   
               <div className='flex items-center gap-2 px-4 cursor-pointer' onClick={Logout}>
                        <MdOutlineLogout size={15} color={"red"}/>  { nameDelete}
-                </div>
+              </div>
                     
                    
                    

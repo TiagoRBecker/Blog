@@ -1,14 +1,21 @@
+import { HtmlProps } from "next/dist/shared/lib/html-context";
 import RingLoader from "react-spinners/RingLoader";
 type Props = {
     size:number,
     className:string
+    title:string
 }
-export const Loading  = ({size,className}:Props)=>{
+export interface Span {
+    span:HtmlProps
+}
+export const Loading  = ({size,className, title}:Props)=>{
     return (
-       <section className="w-full h-screen absolute top-0 -left-5 right-0 bottom-0 flex flex-col items-center justify-center z-50 bg-loading">
-        <RingLoader color="#36d7b7" size={size} />
-        <p className={className}>Carregando</p>
-       </section>
+       <section className={className}>
+        <RingLoader
+        
+        color="#36d7b7" size={size} />
+        <p className="text-center">{title}</p>
+        </section>
     )
 }
 

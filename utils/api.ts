@@ -1,7 +1,8 @@
 
 
 import axios from "axios"
-const baseUrl = "https://apiblog-production.up.railway.app"
+//const baseUrl = "http://localhost:8080" //dev
+const baseUrl = "https://apiblog-production.up.railway.app" //produ
 axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
 export default {
     getCategories:async () => {
@@ -51,5 +52,21 @@ export default {
     },
     checkingServer: async ()=>{
         return await axios.get(baseUrl)
+    },
+    updateProfile:async(name:string,email:string,perfil:string,token:string)=>{
+        const formData = new FormData();
+        
+        formData.append("file", perfil);
+        formData.append("name", name);
+        formData.append("email", email);
+        
+
+            const updateProfile = await  axios.post(`${baseUrl}/user/profile`,
+            formData,
+            { headers: { Authorization: `Bearer ${token}` } }
+            
+            )
+            return updateProfile.data
     }
+    
 }

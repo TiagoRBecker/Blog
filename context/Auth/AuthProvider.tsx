@@ -13,10 +13,11 @@ type Children = {
 export const AuthProvider = ({ children }: Children) => {
   const { ["blogCookie"]: token } = parseCookies();
   const [user, setUser] = useState<User>(null!!);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [errors, setErros] = useState('')
 
   useEffect(() => {
+    
     const getServer = async () => {
       const server = await axios
         .get("https://apiblog-production.up.railway.app/teste")
@@ -48,14 +49,18 @@ export const AuthProvider = ({ children }: Children) => {
   }, []);
 
   const signIn = async (email: string, password: string) => {
+   
     try {
+      setLoading(true)
       const auth = await axios.post("https://apiblog-production.up.railway.app/user/signin", {
         email,
         password,
       });
+
       const data = auth.data;
 
       if (auth.status === 200) {
+        
         setCookie(undefined, "blogCookie", auth.data.token, {
           maxAge: 60 * 60 * 2,
         });
@@ -63,13 +68,13 @@ export const AuthProvider = ({ children }: Children) => {
       }
       Router.push("/Admin");
       setLoading(false);
-    } catch (error: any) {
-      if(error.response){
-
-      
-       setErros(error.response.data.msg)
-      }else{
-          Router.push('/500')
+    } catch (e: any) {
+      if(e.response){
+        setLoading(false)
+        setErros(e.response.data.msg)}
+     
+      else{
+        Router.push('/500')
       }
     }
   };
@@ -88,17 +93,17 @@ export const AuthProvider = ({ children }: Children) => {
     }
     return;
   };
-  const signOut = async () => {
-    if (token) {
+  const signOut = () => {
+   
       destroyCookie(null, "blogCookie");
-      setLoading(true)
-      return Router.push("/signin");
       
-    }
+  return Router.push("/signin");
+      
+    
    
   };
   return (
-    <AuthContext.Provider value={{ user,errors, loading, signIn, signUp, signOut }}>
+    <AuthContext.Provider value={{ user,errors,setErros, loading, signIn, signUp, signOut }}>
       {children}
     </AuthContext.Provider>
   );

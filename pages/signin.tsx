@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext,useEffect} from "react";
 import { AuthContext } from "../context/Auth/AuthContex";
 import { AiOutlineMail, AiOutlineLock } from "react-icons/ai";
 import Button from "../components/Button";
@@ -6,10 +6,16 @@ import { Loading } from "../components/Loading";
 import Image from "next/image";
 
 const Login = () => {
-  const { signIn, loading,errors } = useContext(AuthContext);
+  const { signIn, loading,errors,setErros } = useContext(AuthContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+ useEffect(()=>{
+     setErros('')
+ },[email,password])
+  
+ 
+ 
+ 
 
   const handleLogin = async (e: any) => {
     e.preventDefault();
@@ -17,10 +23,18 @@ const Login = () => {
     
    
   };
+  console.log(errors)
   
   return (
     <section className=" relative w-full h-screen flex  items-center justify-center ">
-        { !loading && <Loading size={250} className="text-white text-lg"/>}
+        { loading && 
+        <Loading 
+         title="Carregando" 
+          className=" absolute bg-black text-white text-xl w-full  h-full z-50  flex flex-col items-center justify-center" 
+        
+        size={250}
+        />
+      }
         
    
        
@@ -39,6 +53,7 @@ const Login = () => {
                   placeholder="Digite seu E-mail"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
+                  required
                 />
                 <AiOutlineMail
                   size={20}
@@ -51,7 +66,9 @@ const Login = () => {
                   type="password"
                   placeholder="Digite seu Password"
                   value={password}
+                  
                   onChange={(e) => setPassword(e.target.value)}
+                  required
                 />
                 <AiOutlineLock
                   size={20}

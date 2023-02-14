@@ -19,9 +19,9 @@ export type Props = {
 const UserDados = ({ credentials }: Props) => {
   const teste = () => {
     if (!credentials.avatar) {
-      console.log("NAo tem ");
+     
     } else {
-      console.log("tem avatar");
+      
     }
   };
   teste();

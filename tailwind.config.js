@@ -17,12 +17,13 @@ module.exports = {
       }
     },
     screens: {
+      'minCel':{'max':'500px'},
       'cel': {'max':'640px'},
       // => @media (min-width: 640px) { ... }
-      'tablet': {'max':'800px' },
+      'tablet': {'max':'850px' },
       'desktop': {'max':'1024px'},
       // => @media (min-width: 1024px) { ... }
-
+      'alter':{'max':"980px"},
       'pc': {'max': '1280px'},
       // => @media (min-width: 1280px) { ... }
     },

@@ -2,7 +2,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState, useContext } from "react";
 import {
- 
+  MdOutlineLogout,
   MdOutlineVerticalSplit,
   MdNoteAdd,
   MdOutlinePersonPin,
@@ -20,9 +20,12 @@ export type Children = {
 
 export const LayoutAdmin = ({ children }: Children) => {
   const [mobile, setMobile] = useState(false)
-  const { user, loading } = useContext(AuthContext);
+  const { user, loading, signOut } = useContext(AuthContext);
   const router = useRouter();
- 
+  const Logout = () => {
+  
+    signOut();
+  };
   const closedMenu = ()=>{
     setMobile(false)
   }
@@ -154,8 +157,25 @@ export const LayoutAdmin = ({ children }: Children) => {
                   </div>
                 </Link>
               </li>
+              <li className={router.pathname==="/Admin/user/perfil"? "mb-5  w-full   text-blue-600 ":"pb-5  w-full hover:text-blue-600"}>
+                <Link href={"/Admin/user/perfil"}  onClick={ closedMenu}>
+                  <div className="flex gap-2 mb-5">
+                    <div className="w-14 flex items-start justify-center" onClick={Logout}>
+                    <MdOutlineLogout size={25} color={"red"}/> 
+                    </div>
+                    <div className="flex items-center justify-start ">
+                      <h3
+                        
+                      >
+                        {"Logout"}
+                      </h3>
+                    </div>
+                  </div>
+                </Link>
+              </li>
               
             </ul>
+           
       </nav>
       <section className="gridT">
         <aside className="aside tablet:hidden">

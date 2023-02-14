@@ -10,6 +10,7 @@ export type Posts = {
 };
 
 const PostList = ({ posts }: Posts) => {
+  console.log(posts)
   const handlePost = () => {
     Router.push("/Admin/posts/add-new-post");
   };
@@ -116,7 +117,7 @@ export default PostList;
 
 export async function getServerSideProps(ctx: any) {
   const category = await api.getCategories();
-
+  console.log(category)
   return {
     props: {
       posts: category.get,
