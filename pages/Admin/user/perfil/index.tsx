@@ -17,14 +17,7 @@ export type Props = {
 };
 
 const UserDados = ({ credentials }: Props) => {
-  const teste = () => {
-    if (!credentials.avatar) {
-     
-    } else {
-      
-    }
-  };
-  teste();
+  
   return (
     <LayoutAdmin>
       <div className="w-full  bg-gray-100 overflow-auto    ">

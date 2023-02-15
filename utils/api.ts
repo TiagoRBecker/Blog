@@ -1,5 +1,4 @@
 
-
 import axios from "axios"
 //const baseUrl = "http://localhost:8080" //dev
 const baseUrl = "https://apiblog-production.up.railway.app" //produ
@@ -53,6 +52,22 @@ export default {
     checkingServer: async ()=>{
         return await axios.get(baseUrl)
     },
+    authenticadet: async (email:string,password:string)=>{
+         const auth = await axios.post(`${baseUrl}/user/signin`,{
+            email,
+            password
+         })
+         return auth.data
+    },
+    signup:async(name:string,email:string,password:string)=>{
+        const createAccount = await axios.post(`${baseUrl}/user/signup`,{
+            name,
+            email,
+            password
+         })
+         return createAccount.data
+
+    },
     updateProfile:async(name:string,email:string,perfil:string,token:string)=>{
         const formData = new FormData();
         
@@ -67,6 +82,27 @@ export default {
             
             )
             return updateProfile.data
+    },
+    createPost: async(title:String, content:string,authorId:number,authorName:string, perfil:string,selectValue:number)=>{
+        const formData = new FormData();
+        formData.append("title", title as any);
+        formData.append("content", content);
+        formData.append("authorId", authorId as any);
+        formData.append("authorName", authorName as any);
+        formData.append("categoriesId", selectValue as any);
+        formData.append("file", perfil as any);
+       
+        const createPost = await axios.post(`${baseUrl}/posts`,formData)
+        return createPost.data
+    },
+    updatePost: async( id:number,title:string, content:string ,perfil:string)=>{
+        const formData = new FormData();
+        formData.append("title", title as any);
+        formData.append("content", content);
+        formData.append("file", perfil as any);
+        const updatePost = await axios.put(`${baseUrl}/posts/${id}`,formData)
+        return updatePost.data
     }
+     
     
 }

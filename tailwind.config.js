@@ -20,7 +20,7 @@ module.exports = {
       'minCel':{'max':'500px'},
       'cel': {'max':'640px'},
       // => @media (min-width: 640px) { ... }
-      'tablet': {'max':'850px' },
+      'tablet': {'max':'930px' },
       'desktop': {'max':'1024px'},
       // => @media (min-width: 1024px) { ... }
       'alter':{'max':"980px"},

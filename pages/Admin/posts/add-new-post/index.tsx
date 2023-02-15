@@ -9,6 +9,7 @@ import Button from "../../../../components/Button";
 import axios from "axios";
 import Router from "next/router";
 import { Loading } from "../../../../components/Loading";
+import api from "../../../../utils/api";
 
 
 
@@ -31,6 +32,12 @@ const Posts = () => {
 
   const handleClick = async (e: any) => {
     e.preventDefault();
+   
+    //id and name User
+    const authorId = Number(user?.id)
+    const authorName = user?.name as any
+   
+
     if (Number(selectValue) === 0) {
       setErrorCategory(true);
       alert("Necessario escolher uma categoria");
@@ -41,48 +48,26 @@ const Posts = () => {
       return alert("Necessario preencher os campos vaxios ")
     }
 
-    //title,content,authorId,authorName,categoriesId,url
-    const formData = new FormData();
-    formData.append("title", title);
-    formData.append("content", content);
-    formData.append("authorId", user?.id as any);
-    formData.append("authorName", user?.name as any);
-    formData.append("categoriesId", selectValue);
-    formData.append("file", perfil as any);
  
-    setLoading(true)
-    const createPost = await axios.post("https://apiblog-production.up.railway.app/posts",formData)
+    
+ setLoading(true)
+    const createPost = await api.createPost(title, content,authorId,authorName,perfil,selectValue)
     .then((response)=>{
+      if(response){
       setLoading(false)
       setLottie(true)
-       console.log(response)
+      }
     })
     .catch((e)=>{
-        console.log(e)
+        if(e.response){
         setLoading(false)
         setLottie(false)
         setErrorFile(true)
       
-     
-    })
-   /* const createNewPost = await  axios
-      .post("http://localhost:8080/posts", formData)
-      .then((response) => {
-        if (response.data === 200) {
-          console.log(response)
-          
-         
         }
-      })
-      .catch((error: any) => {
-        if (error.response) {
-          setError(error.response.data.msg);
-         
+    })
 
-        } else {
-          
-        }*/
-
+  
 
   };
   const handleAddPost = () => {

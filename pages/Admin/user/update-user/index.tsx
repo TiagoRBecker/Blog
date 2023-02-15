@@ -38,16 +38,13 @@ const Update = ({ userDados }: Props) => {
   const handlePerfil = async (e: any) => {
     e.preventDefault();
     setLoading(true)
-    const formData = new FormData();
+    
 
-    /*formData.append("file", perfil);
-    formData.append("name", name);
-    formData.append("email", email);*/
     const testes = await api.updateProfile(name,email,perfil,token)
       .then((response) => {
         setLoading(false)
         setLottie(true)
-        return console.log(response);
+        
       })
       .catch((e) => {
         if (e.response) {

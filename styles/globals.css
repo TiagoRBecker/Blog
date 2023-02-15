@@ -31,6 +31,10 @@ body,html{
   "aside main"
   ;
 }
+.col{
+  display: flex;
+  flex-direction: column;
+}
 .borderPosts{
   border-left: 4px solid #1E90FF;
   border-top: 1px solid #ccc;
@@ -245,7 +249,7 @@ height: 139px;
 .tflex{
   display: flex;
 }
-@media screen and (max-width:850px) {
+@media screen and (max-width:930px) {
   .gridT{
     grid-template-areas: "main main";
   }

@@ -10,7 +10,7 @@ import Button from "../components/Button";
 
 
 const Home = ({ data, like, categories }: any) => {
-     console.log(categories)
+
 
 
   const option = {
