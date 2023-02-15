@@ -41,7 +41,7 @@ const UserDados = ({ credentials }: Props) => {
               )}
             </div>
             <div className="w-full flex items-center justify-center flex-col">
-              <h1 className="text-gray-600 text-2xl font-bold">Tiago Becker</h1>
+              <h1 className="text-gray-600 text-2xl font-bold">{credentials.name}</h1>
               <p className="text-black font-bold">Desenvolvedor</p>
             </div>
             <div className="w-full py-5 mt-6 border-t border-border-gray-300  border-b tablet:hidden"></div>
